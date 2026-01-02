@@ -1,0 +1,18 @@
+name: Monorepo CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: medyagh/setup-minikube@latest
+      - run: |
+          eval $(minikube docker-env)
+          docker build -t backend:latest apps/backend-api
+          docker build -t frontend:latest apps/frontend-ui
+          docker build -t admin:latest apps/admin-ui
+          kubectl apply -f infra/k8s
