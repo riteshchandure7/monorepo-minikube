@@ -1,0 +1,13 @@
+{
+  "name": "monorepo-node-react",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build:frontend": "npm --workspace apps/frontend-ui run build",
+    "build:admin": "npm --workspace apps/admin-ui run build",
+    "start:backend": "npm --workspace apps/backend-api start"
+  }
+}
